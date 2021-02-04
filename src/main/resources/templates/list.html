@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>契約中サービス一覧</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/design.css" th:href="@{/css/design.css}">
+    <!-- CSS -->
+</head>
+
+
+<body>
+<h1>契約サービス一覧</h1>
+
+<table border="5">
+    <tr>
+        <th>サイト名</th>
+        <th>契約日</th>
+        <th>無料期間終了日</th>
+        <th class="delete">残日数</th>
+        <th class="delete">詳細</th>
+        <th class="delete">削除</th>
+    </tr>
+
+    <!--th:each="変数:${コレクション}"で記述できる。${コレクション}の値を1つずつ取り出し変数に代入し、以降の処理の中で変数.フィールドの形で値へアクセスできる。-->
+    <tr th:each ="service:${data}">
+        <td class="listtd"><span th:text="${service.s_name}"></span></td>
+        <td class="listtd"><span th:text="${service.r_date}"></span></td>
+        <td class="listtd"><span th:text="${service.t_period}"></span></td>
+
+
+        <td style="background-color: #003366;" th:id="${service.s_name}">
+            <b>
+                <script th:inline="javascript">
+/*<![CDATA[*/
+
+var today = new Date();
+
+var period = new Date (/*[[${service.t_period}]]*/) ;
+var name = /*[[${service.s_name}]]*/
+var day = Math.ceil((period-today)/(60*60*24*1000));
+
+
+function color0(){
+	document.bgColor = "#000000"; // bgcolor：背景色
+	document.fgColor = "#FFFFFF"; // text：文字の基本色
+}
+function color1(){
+	document.bgColor = "#FF0000";
+	document.fgColor = "#000000";
+	}
+function color2(){
+	document.bgColor = "#FF8C00";
+	document.fgColor = "#000000";
+}
+function color3(){
+	document.bgColor = "#FFFF00";
+	document.fgColor = "#000000"; // text：文字の基本色
+}
+
+var message = "残"+day+"日";
+var message2 = "本日終了";
+var message3 = Math.abs(day)+"日経過"
+target = document.getElementById(name);
+if(day < 0){
+			target.style.backgroundColor="#000000";
+	   document.write(message3.fontcolor("red"));
+	}else if(day == 0){
+		target.style.backgroundColor="#FF0000";
+		document.write(message2.fontcolor("black"));
+	}else if(day < 2){
+		target.style.backgroundColor="#FF0000";
+		document.write(message.fontcolor("black"));
+	}else if(day < 4){
+		target.style.backgroundColor="#FF8C00";
+	   document.write(message.fontcolor("red"));
+	}else if(day < 8){
+		target.style.backgroundColor="#FFFF00";
+	   document.write(message.fontcolor("red"));
+	}else{
+	   document.write(message);
+	}
+
+/*]]>*/
+</script>
+            </b>
+        </td>
+
+
+        <td class="listtd"><a th:href="@{/detail/{id}(id=${service.id})}"><button class="detailbutton" type="submit"  th:value="${service.id}" name="moving">詳細</button></a></td>
+        <td class="listtd">
+
+            <form method="post" th:action="@{/delete}">
+                <button class="right" type="submit" th:value="${service.id}" name="id">削除</button>
+            </form>
+        </td>
+    </tr>
+
+</table>
+
+<a class="totopbutton" href = "top" >・TOPへ・</a>
+
+</body>
+</html>
