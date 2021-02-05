@@ -8,7 +8,6 @@
     <!-- CSS -->
 </head>
 
-
 <body>
 <h1>契約サービス一覧</h1>
 
@@ -24,20 +23,20 @@
 
     <!--th:each="変数:${コレクション}"で記述できる。${コレクション}の値を1つずつ取り出し変数に代入し、以降の処理の中で変数.フィールドの形で値へアクセスできる。-->
     <tr th:each ="service:${data}">
-        <td class="listtd"><span th:text="${service.s_name}"></span></td>
-        <td class="listtd"><span th:text="${service.r_date}"></span></td>
-        <td class="listtd"><span th:text="${service.t_period}"></span></td>
+        <td class="listtd"><span th:text="${service.serviceName}"></span></td>
+        <td class="listtd"><span th:text="${service.registrationDate}"></span></td>
+        <td class="listtd"><span th:text="${service.period}"></span></td>
 
 
-        <td style="background-color: #003366;" th:id="${service.s_name}">
+        <td style="background-color: #003366;" th:id="${service.serviceName}">
             <b>
                 <script th:inline="javascript">
 /*<![CDATA[*/
 
 var today = new Date();
 
-var period = new Date (/*[[${service.t_period}]]*/) ;
-var name = /*[[${service.s_name}]]*/
+var period = new Date (/*[[${service.period}]]*/) ;
+var name = /*[[${service.serviceName}]]*/
 var day = Math.ceil((period-today)/(60*60*24*1000));
 
 
@@ -87,11 +86,11 @@ if(day < 0){
         </td>
 
 
-        <td class="listtd"><a th:href="@{/detail/{id}(id=${service.id})}"><button class="detailbutton" type="submit"  th:value="${service.id}" name="moving">詳細</button></a></td>
+        <td class="listtd"><a th:href="@{/detail/{id}(id=${service.serviceId})}"><button class="detailbutton" type="submit"  th:value="${service.serviceId}" name="moving">詳細</button></a></td>
         <td class="listtd">
 
             <form method="post" th:action="@{/delete}">
-                <button class="right" type="submit" th:value="${service.id}" name="id">削除</button>
+                <button class="right" type="submit" th:value="${service.serviceId}" name="id">削除</button>
             </form>
         </td>
     </tr>

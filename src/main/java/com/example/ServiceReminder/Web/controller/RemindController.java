@@ -34,14 +34,14 @@ public class RemindController {
     private JdbcTemplate jdbc;
 
     @GetMapping("/top")
-        public String top(){
-                return "top";
+    public String top(){
+        return "top";
     }
     /*
-    *TOPページにアクセスした際にDBから現在時刻と契約終了時の差分をリストで保持し、
-    * 残り1日or当日のものがあればSlackにてメッセージ送信
-    * ｢jdbc.queryForList("SELECT DateDiff(day,CURRENT_DATE(),t_period)FROM service").get(0);｣が
-    * エラーの為、コメントアウト
+     *TOPページにアクセスした際にDBから現在時刻と契約終了時の差分をリストで保持し、
+     * 残り1日or当日のものがあればSlackにてメッセージ送信
+     * ｢jdbc.queryForList("SELECT DateDiff(day,CURRENT_DATE(),t_period)FROM service").get(0);｣が
+     * エラーの為、コメントアウト
      */
 
 //    public String top(Model model) {
@@ -109,8 +109,8 @@ public class RemindController {
 
 
     /*
-    *アプデ済み
-    */
+     *アプデ済み
+     */
     @PostMapping("/post")
     public String Post(ServiceForm form, Model model){
         Service service = new Service();
