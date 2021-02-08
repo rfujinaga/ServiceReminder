@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Service {
+    private Long id;
     private String serviceName;
     private String registrationDate;
     private String period;

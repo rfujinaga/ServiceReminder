@@ -86,11 +86,11 @@ if(day < 0){
         </td>
 
 
-        <td class="listtd"><a th:href="@{/detail/{id}(id=${service.serviceId})}"><button class="detailbutton" type="submit"  th:value="${service.serviceId}" name="moving">詳細</button></a></td>
+        <td class="listtd"><a th:href="@{/detail/{id}(id=${service.id})}"><button class="detailbutton" type="submit"  th:value="${service.id}" name="moving">詳細</button></a></td>
         <td class="listtd">
 
-            <form method="post" th:action="@{/delete}">
-                <button class="right" type="submit" th:value="${service.serviceId}" name="id">削除</button>
+            <form method="post" th:action="@{/delete/{id}(id=${service.id})}">
+                <button class="right" type="submit" th:value="${service.id}" name="id">削除</button>
             </form>
         </td>
     </tr>

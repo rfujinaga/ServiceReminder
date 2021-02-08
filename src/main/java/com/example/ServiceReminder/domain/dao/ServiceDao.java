@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 
 @Repository//DAO(DataAccessObject)クラスに付与するアノテーション
@@ -17,7 +18,7 @@ public class ServiceDao {
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate; //JDBC 操作の基本セットを備えたテンプレートクラス
 
-    @Transactional//新規登録メソッド
+    //新規登録メソッド
     public void insert(Service service) {
         final String INSERT = "INSERT INTO SERVICE (service_name,registration_date,period,mail_address,card_brand,card_num,service_id,password,memo) values ("
                 + ":serviceName, :registrationDate, :period, :mailAddress, :cardBrand, :cardNum, :serviceId, :password, :memo)";
@@ -25,9 +26,22 @@ public class ServiceDao {
     }
 
     //一覧表示メソッド
-    public List<Service> view() {
-        final String SQL = "SELECT * from service";
-        return jdbcTemplate.query(SQL, new BeanPropertyRowMapper<>(Service.class));
+    public List<Service> viewAll() {
+        final String VIEW = "SELECT * from service";
+        return jdbcTemplate.query(VIEW, new BeanPropertyRowMapper<>(Service.class));
     }
+
+    //詳細表示メソッド
+    public Map<String,Object> viewDetail(Long id){
+        final String DETAIL = "SELECT * FROM SERVICE WHERE id = :id";
+        return jdbcTemplate.queryForMap(DETAIL,id);
+    }
+
+    //削除メソッド
+    public void delete(Long id){
+        final String DELETE = "DELETE FROM service WHERE id = " + ":id";
+        jdbcTemplate.update(DELETE,new BeanPropertySqlParameterSource(id));
+    }
+
 
 }

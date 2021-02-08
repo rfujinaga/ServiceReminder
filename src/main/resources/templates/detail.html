@@ -19,9 +19,9 @@
         <th class="detailth">カード番号</th>
     </tr>
     <tr>
-        <td class="detailtd"><span th:text="${mailaddress}"></span></td>
-        <td class="detailtd"><span th:text="${card_bra}"></span></td>
-        <td class="detailtd"><span th:text="${card_num}"></span></td>
+        <td class="detailtd"><span th:text="${service.mailAddress}"></span></td>
+        <td class="detailtd"><span th:text="${service.cardBrand}"></span></td>
+        <td class="detailtd"><span th:text="${service.cardNum}"></span></td>
     </tr>
 </table>
 <br>
@@ -33,9 +33,9 @@
         <th class="detailth">備考</th>
     </tr>
     <tr>
-        <td class="detailtd"><span th:text="${s_id}"></span></td>
-        <td class="detailtd"><span th:text="${password}"></span></td>
-        <td class="detailtd bikou"><span th:text="${other}"></span></td>
+        <td class="detailtd"><span th:text="${service.serviceId}"></span></td>
+        <td class="detailtd"><span th:text="${service.password}"></span></td>
+        <td class="detailtd bikou"><span th:text="${service.memo}"></span></td>
     </tr>
 </table>
 
