@@ -52,13 +52,14 @@ public class RemindController {
     public String detail(@PathVariable("id") Long id,Model model) {
         Map<String,Object> serviceMap = serviceDao.viewDetail(id);
         Service service = new Service();
-        service.setMailAddress((String) serviceMap.get("mailAddress"));
-        service.setCardBrand((String) serviceMap.get("cardBrand"));
-        service.setCardNum((String) serviceMap.get("cardNum"));
-        service.setServiceId((String) serviceMap.get("serviceId"));
+        service.setMailAddress((String) serviceMap.get("mail_address"));
+        service.setCardBrand((String) serviceMap.get("card_brand"));
+        service.setCardNum((String) serviceMap.get("card_num"));
+        service.setServiceId((String) serviceMap.get("service_id"));
         service.setPassword((String) serviceMap.get("password"));
         service.setMemo((String) serviceMap.get("memo"));
-        return "redirect:/detail";
+        model.addAttribute("service",service);
+        return "detail";
     }
 
     //これいる？

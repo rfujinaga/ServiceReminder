@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -34,13 +33,13 @@ public class ServiceDao {
     //詳細表示メソッド
     public Map<String,Object> viewDetail(Long id){
         final String DETAIL = "SELECT * FROM SERVICE WHERE id = :id";
-        return jdbcTemplate.queryForMap(DETAIL,id);
+        return jdbcTemplate.queryForMap(DETAIL, Map.of("id",id));
     }
 
     //削除メソッド
     public void delete(Long id){
         final String DELETE = "DELETE FROM service WHERE id = " + ":id";
-        jdbcTemplate.update(DELETE,new BeanPropertySqlParameterSource(id));
+        jdbcTemplate.update(DELETE,Map.of("id",id));
     }
 
 
